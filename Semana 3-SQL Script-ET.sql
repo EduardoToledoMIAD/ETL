@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Producto (
   ID_Producto_T int NOT NULL,
   Nombre varchar(100),
   Marca varchar(50),
-  Color  int ,
+  Color  varchar(20) ,
   Necesitarefrigeracion boolean,
   Dias_tiempo_entrega int,
   cantidad_por_salida int ,
@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS Proveedor (
   ID_Proveedor_DWH int not NULL auto_increment,
   ID_Proveedor_T int not NULL,
   Nombre  varchar(100),
-  Categoria int,
-  Contacto_principal varchar(30),
+  Categoria varchar (50),
+  Contacto_principal varchar(50),
   Dias_pago int ,
   Codigo_postal int,
   PRIMARY KEY (ID_Proveedor_DWH)
@@ -41,13 +41,13 @@ CREATE TABLE IF NOT EXISTS Cliente (
   ID_Cliente_DWH int not NULL auto_increment,
   ID_Cliente_T int not NULL,
   Nombre  varchar(100) not null,
-  ClienteFactura varchar(100),
+  ClienteFactura int,
   ID_CiudadEntrega_DWH int,
   LimiteCredito DECIMAL(10,2),
   FechaAperturaCuenta date,
   DiasPago int ,
-  NombreGrupoCompra varchar(30),
-  NombreCategoria varchar(30),
+  NombreGrupoCompra varchar(50),
+  NombreCategoria varchar(50),
   PRIMARY KEY (ID_Cliente_DWH)
 ) ;
 
@@ -84,28 +84,28 @@ VALUES
 
 INSERT INTO Producto (ID_Producto_T, Nombre, Marca, Color, Necesitarefrigeracion, Dias_tiempo_entrega, cantidad_por_salida, Precio_minorista_recomendado, Impuesto, Precio_unitario)
 VALUES
-    ( 10, 'Producto A', 'Marca A', 1, true, 3, 10, 25.99, 0.19, 20),
-    ( 11, 'Producto B', 'Marca B', 2, false, 5, 15, 19.99, 0.19, 15),
-    ( 11, 'Producto C', 'Marca C', 3, true, 2, 8, 34.50, 0.19, 30),
-    ( 12, 'Producto D', 'Marca D', 1, false, 4, 12, 14.75, 0.19, 12),
-    ( 13, 'Producto E', 'Marca E', 2, true, 7, 20, 28.99, 0.19, 25);
+    ( 10, 'Producto A', 'Marca A', 'rojo', true, 3, 10, 25.99, 0.19, 20),
+    ( 11, 'Producto B', 'Marca B', 'naranjaCliente', false, 5, 15, 19.99, 0.19, 15),
+    ( 11, 'Producto C', 'Marca C', 'rojo', true, 2, 8, 34.50, 0.19, 30),
+    ( 12, 'Producto D', 'Marca D', 'amarillo', false, 4, 12, 14.75, 0.19, 12),
+    ( 13, 'Producto E', 'Marca E', 'verde', true, 7, 20, 28.99, 0.19, 25);
 
 
 INSERT INTO Proveedor ( ID_Proveedor_T, Nombre, Categoria, Contacto_principal, Dias_pago, Codigo_postal)
 VALUES
-    ( 1001, 'Proveedor A', 1, 'Eduardo Toledo', 30, 67890),
-    ( 1002, 'Proveedor B', 2, 'Mario Torres', 45, 67891),
-    ( 1003, 'Proveedor C', 1, 'Carlos Melo', 60, 67892),
-    ( 1004, 'Proveedor D', 3, 'Laura Teo', 15, 67893),
-    ( 1005, 'Proveedor E', 2, 'Pedro Rojas', 90, 67894);
+    ( 1001, 'Proveedor A', 'servicios de mensajeria', 'Eduardo Toledo', 30, 67890),
+    ( 1002, 'Proveedor B', 'embalaje', 'Mario Torres', 45, 67891),
+    ( 1003, 'Proveedor C', 'servicios de seguros', 'Carlos Melo', 60, 67892),
+    ( 1004, 'Proveedor D', 'ropa', 'Laura Teo', 15, 67893),
+    ( 1005, 'Proveedor E', 'juguetes', 'Pedro Rojas', 90, 67894);
     
 INSERT INTO Cliente ( ID_Cliente_T, Nombre, ClienteFactura, ID_CiudadEntrega_DWH, LimiteCredito, FechaAperturaCuenta, DiasPago, NombreGrupoCompra, NombreCategoria)
 VALUES
-    ( 1001, 'Juan Pérez', 'Cliente 1', 1, 1000.00, '2023-01-15', 30, 'Grupo 1', 'Categoría A'),
-    ( 1002, 'María López', 'Cliente 2', 2, 1500.00, '2022-11-20', 45, 'Grupo 2', 'Categoría B'),
-    ( 1003, 'Carlos Gómez', 'Cliente 3', 3, 800.00, '2023-03-05', 60, 'Grupo 3', 'Categoría C'),
-    ( 1004, 'Laura Rodríguez', 'Cliente 4', 4, 1200.00, '2023-04-10', 15, 'Grupo 1', 'Categoría A'),
-    ( 1005, 'Pedro Martínez', 'Cliente 5', 5, 900.00, '2022-09-30', 90, 'Grupo 2', 'Categoría B');
+    ( 1001, 'Juan Pérez', 1, 1, 1000.00, '2023-01-15', 30, 'Grupo 1', 'Categoría A'),
+    ( 1002, 'María López', 401, 2, 1500.00, '2022-11-20', 45, 'Grupo 2', 'Categoría B'),
+    ( 1003, 'Carlos Gómez', 806, 3, 800.00, '2023-03-05', 60, 'Grupo 3', 'Categoría C'),
+    ( 1004, 'Laura Rodríguez', 904, 4, 1200.00, '2023-04-10', 15, 'Grupo 1', 'Categoría A'),
+    ( 1005, 'Pedro Martínez', 905, 5, 900.00, '2022-09-30', 90, 'Grupo 2', 'Categoría B');
 
 INSERT INTO TipoTransaction ( ID_Tipo_transaction_T, Tipo)
 VALUES
@@ -126,22 +126,21 @@ VALUES
 # SENTENCIAS DE VERIFICACION
 
 SELECT * FROM
-Estudiante_111_202315.Cliente;
+Cliente;
 
 SELECT * FROM
-Estudiante_111_202315.Proveedor;
+Proveedor;
 
 SELECT * FROM
-Estudiante_111_202315.Producto;
+Producto;
 
 SELECT * FROM 
-Estudiante_111_202315.Fecha;
+Fecha;
 
 SELECT * FROM 
-Estudiante_111_202315.TipoTransaction;
+TipoTransaction;
 
-SELECT * FROM 
-Estudiante_111_202315.Hecho_Movimiento;
+SELECT * FROM Hecho_Movimiento;
     
 #QUERY ANALITICO
 
