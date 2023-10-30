@@ -126,21 +126,22 @@ VALUES
 # SENTENCIAS DE VERIFICACION
 
 SELECT * FROM
-Cliente;
+Estudiante_111_202315.Cliente;
 
 SELECT * FROM
-Proveedor;
+Estudiante_111_202315.Proveedor;
 
 SELECT * FROM
-Producto;
+Estudiante_111_202315.Producto;
 
 SELECT * FROM 
-Fecha;
+Estudiante_111_202315.Fecha;
 
 SELECT * FROM 
-TipoTransaction;
+Estudiante_111_202315.TipoTransaction;
 
-SELECT * FROM Hecho_Movimiento;
+SELECT * FROM 
+Estudiante_111_202315.Hecho_Movimiento;
     
 #QUERY ANALITICO
 
