@@ -51,11 +51,11 @@ CREATE TABLE IF NOT EXISTS Cliente (
   PRIMARY KEY (ID_Cliente_DWH)
 ) ;
 
-CREATE TABLE IF NOT EXISTS TipoTransaction (
-  ID_Tipo_transaction_DWH int not NULL auto_increment,
-  ID_Tipo_transaction_T int not NULL,
+CREATE TABLE IF NOT EXISTS TipoTransaccion (
+  ID_Tipo_transaccion_DWH int not NULL auto_increment,
+  ID_Tipo_transaccion_T int not NULL,
   Tipo varchar(50) not NULL,
-  PRIMARY KEY (ID_Tipo_transaction_DWH)
+  PRIMARY KEY (ID_Tipo_transaccion_DWH)
 ) ;
 
 CREATE TABLE IF NOT EXISTS Hecho_Movimiento (
@@ -63,13 +63,13 @@ CREATE TABLE IF NOT EXISTS Hecho_Movimiento (
   ID_Producto_DWH int NOT NULL,
   ID_Proveedor_DWH int NOT NULL,
   ID_Cliente_DWH int NOT NULL,
-  ID_Tipo_transaction_DWH int NOT NULL,
+  ID_Tipo_transaccion_DWH int NOT NULL,
   Cantidad int,
   FOREIGN KEY(ID_Fecha) REFERENCES Fecha(ID_Fecha),
   FOREIGN KEY(ID_Proveedor_DWH) REFERENCES Proveedor(ID_Proveedor_DWH),
   FOREIGN KEY(ID_Producto_DWH) REFERENCES Producto(ID_Producto_DWH),
   FOREIGN KEY(ID_Cliente_DWH) REFERENCES Cliente(ID_Cliente_DWH),
-  FOREIGN KEY(ID_Tipo_transaction_DWH) REFERENCES TipoTransaction(ID_Tipo_transaction_DWH)
+  FOREIGN KEY(ID_Tipo_transaccion_DWH) REFERENCES TipoTransaccion(ID_Tipo_transaccion_DWH)
   
 );
 
@@ -107,15 +107,15 @@ VALUES
     ( 1004, 'Laura Rodríguez', 904, 4, 1200.00, '2023-04-10', 15, 'Grupo 1', 'Categoría A'),
     ( 1005, 'Pedro Martínez', 905, 5, 900.00, '2022-09-30', 90, 'Grupo 2', 'Categoría B');
 
-INSERT INTO TipoTransaction ( ID_Tipo_transaction_T, Tipo)
+INSERT INTO TipoTransaccion ( ID_Tipo_transaccion_T, Tipo)
 VALUES
     ( 1001,'Customer Credit Note'),
     ( 1002,'Customer Payment Received'),
     ( 1003,'Customer Refund'),
     ( 1004, 'Supplier Invoice'),
     ( 1005,'Supplier Credit Note');
-    
-INSERT INTO Hecho_Movimiento (ID_Fecha, ID_Producto_DWH, ID_Proveedor_DWH, ID_Cliente_DWH, ID_Tipo_transaction_DWH, Cantidad)
+
+INSERT INTO Hecho_Movimiento (ID_Fecha, ID_Producto_DWH, ID_Proveedor_DWH, ID_Cliente_DWH, ID_Tipo_transaccion_DWH, Cantidad)
 VALUES
     (20231023, 1, 1, 1, 1, 100),
     (20231024, 2, 2, 2, 2, 75),
@@ -138,7 +138,7 @@ SELECT * FROM
 Fecha;
 
 SELECT * FROM 
-TipoTransaction;
+TipoTransaccion;
 
 SELECT * FROM Hecho_Movimiento;
     
@@ -149,7 +149,7 @@ SELECT
     C.Nombre as NombreCliente,
     HM.ID_Proveedor_DWH,
     P.Nombre as NombreProveedor,
-    HM.ID_Tipo_transaction_DWH,
+    HM.ID_Tipo_transaccion_DWH,
     COUNT(*) as NumeroProductosMovidos,
     SUM(HM.cantidad) as CantidadProductosMovidos
  
@@ -158,5 +158,5 @@ INNER JOIN Fecha F ON HM.ID_Fecha = F.ID_Fecha
 INNER JOIN Cliente C ON HM.ID_Cliente_DWH = C.ID_Cliente_DWH
 INNER JOIN Proveedor P ON HM.ID_Proveedor_DWH = P.ID_Proveedor_DWH
 WHERE F.Fecha BETWEEN '2023-01-01' AND '2023-12-31' 
-GROUP BY HM.ID_Cliente_DWH, HM.ID_Proveedor_DWH, HM.ID_Tipo_transaction_DWH;
+GROUP BY HM.ID_Cliente_DWH, HM.ID_Proveedor_DWH, HM.ID_Tipo_transaccion_DWH;
 
