@@ -14,15 +14,15 @@ CREATE TABLE IF NOT EXISTS Fecha (
 CREATE TABLE IF NOT EXISTS Producto (
   ID_Producto_DWH int NOT NULL auto_increment,
   ID_Producto_T int NOT NULL,
-  Nombre varchar(100) DEFAULT NULL,
-  Marca varchar(50) DEFAULT NULL,
-  Color  int DEFAULT NULL,
-  Necesitarefrigeracion boolean DEFAULT NULL,
-  Dias_tiempo_entrega int DEFAULT NULL,
-  cantidad_por_salida int DEFAULT NULL,
-  Precio_minorista_recomendado decimal(10,2) DEFAULT NULL,
-  Impuesto decimal(10,2) DEFAULT NULL,
-  Precio_unitario decimal(10,0) DEFAULT NULL,
+  Nombre varchar(100),
+  Marca varchar(50),
+  Color  int ,
+  Necesitarefrigeracion boolean,
+  Dias_tiempo_entrega int,
+  cantidad_por_salida int ,
+  Precio_minorista_recomendado decimal(10,2) ,
+  Impuesto decimal(10,2) ,
+  Precio_unitario decimal(10,0) ,
   PRIMARY KEY (ID_Producto_DWH)
 );
 
@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS Proveedor (
   ID_Proveedor_DWH int not NULL auto_increment,
   ID_Proveedor_T int not NULL,
   Nombre  varchar(100),
-  Categoria int DEFAULT NULL,
-  Contacto_principal varchar(30) DEFAULT NULL,
-  Dias_pago int DEFAULT NULL,
-  Codigo_postal int DEFAULT NULL,
+  Categoria int,
+  Contacto_principal varchar(30),
+  Dias_pago int ,
+  Codigo_postal int,
   PRIMARY KEY (ID_Proveedor_DWH)
 ) ;
 
@@ -41,13 +41,13 @@ CREATE TABLE IF NOT EXISTS Cliente (
   ID_Cliente_DWH int not NULL auto_increment,
   ID_Cliente_T int not NULL,
   Nombre  varchar(100) not null,
-  ClienteFactura varchar(100) DEFAULT NULL,
-  ID_CiudadEntrega_DWH int not NULL,
-  LimiteCredito DECIMAL(10,2) DEFAULT NULL,
-  FechaAperturaCuenta date DEFAULT null,
-  DiasPago int DEFAULT NULL,
-  NombreGrupoCompra varchar(30) DEFAULT null,
-  NombreCategoria varchar(30) DEFAULT null,
+  ClienteFactura varchar(100),
+  ID_CiudadEntrega_DWH int,
+  LimiteCredito DECIMAL(10,2),
+  FechaAperturaCuenta date,
+  DiasPago int ,
+  NombreGrupoCompra varchar(30),
+  NombreCategoria varchar(30),
   PRIMARY KEY (ID_Cliente_DWH)
 ) ;
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS Hecho_Movimiento (
   ID_Proveedor_DWH int NOT NULL,
   ID_Cliente_DWH int NOT NULL,
   ID_Tipo_transaction_DWH int NOT NULL,
-  Cantidad int DEFAULT NULL,
+  Cantidad int,
   FOREIGN KEY(ID_Fecha) REFERENCES Fecha(ID_Fecha),
   FOREIGN KEY(ID_Proveedor_DWH) REFERENCES Proveedor(ID_Proveedor_DWH),
   FOREIGN KEY(ID_Producto_DWH) REFERENCES Producto(ID_Producto_DWH),
