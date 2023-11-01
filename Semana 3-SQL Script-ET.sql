@@ -126,24 +126,24 @@ VALUES
 # SENTENCIAS DE VERIFICACION
 
 SELECT * FROM
-Cliente;
+Estudiante_111_202315.Cliente;
 
 SELECT * FROM
-Proveedor;
+Estudiante_111_202315.Proveedor;
 
 SELECT * FROM
-Producto;
+Estudiante_111_202315.Producto;
 
 SELECT * FROM 
-Fecha;
+Estudiante_111_202315.Fecha;
 
 SELECT * FROM 
-TipoTransaccion;
+Estudiante_111_202315.TipoTransaccion;
 
-SELECT * FROM Hecho_Movimiento;
+SELECT * FROM 
+Estudiante_111_202315.Hecho_Movimiento;
     
 #QUERY ANALITICO
-
 SELECT
     HM.ID_Cliente_DWH,
     C.Nombre as NombreCliente,
@@ -152,7 +152,6 @@ SELECT
     HM.ID_Tipo_transaccion_DWH,
     COUNT(*) as NumeroProductosMovidos,
     SUM(HM.cantidad) as CantidadProductosMovidos
- 
 FROM Hecho_Movimiento HM 
 INNER JOIN Fecha F ON HM.ID_Fecha = F.ID_Fecha
 INNER JOIN Cliente C ON HM.ID_Cliente_DWH = C.ID_Cliente_DWH
