@@ -5,8 +5,9 @@ DROP TABLE  Estudiante_111_202315.TipoTransaccion;
 DROP TABLE Estudiante_111_202315.Proveedor;
 DROP TABLE Estudiante_111_202315.Producto;
 DROP TABLE Estudiante_111_202315.Fecha;
-DROP TABLE Estudiante_111_202315.Ciudad;
 DROP TABLE Estudiante_111_202315.Cliente;
+DROP TABLE Estudiante_111_202315.Ciudad;
+
 
 
 
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS Proveedor (
 ) ;
 CREATE TABLE  IF NOT EXISTS Ciudad (
   ID_Ciudad_DWH bigint NOT NULL,
-  ID_ciudad_T int,
+  ID_Ciudad_T int,
   NombreCiudad text,
   Continente text,
   Pais text,
@@ -66,15 +67,13 @@ CREATE TABLE IF NOT EXISTS Cliente (
   ID_Cliente_T int not NULL,
   Nombre  varchar(100) not null,
   ClienteFactura int,
-  ID_CiudadEntrega_DWH int,
+  ID_CiudadEntrega_DWH bigint,
   LimiteCredito DECIMAL(10,2),
   FechaAperturaCuenta date,
   DiasPago int ,
   NombreGrupoCompra varchar(50),
   NombreCategoria varchar(50),
   PRIMARY KEY (ID_Cliente_DWH)
-  #FOREIGN KEY(ID_CiudadEntrega_DWH) REFERENCES Ciudad(ID_Ciudad_DWH)
- 
 ) ;
 
 CREATE TABLE IF NOT EXISTS TipoTransaccion (
