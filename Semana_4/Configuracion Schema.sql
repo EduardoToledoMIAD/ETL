@@ -9,9 +9,6 @@ DROP TABLE Estudiante_111_202315.Cliente;
 DROP TABLE Estudiante_111_202315.Ciudad;
 
 
-
-
-
 CREATE TABLE IF NOT EXISTS Fecha (
 	ID_Fecha bigint NOT NULL,
 	Fecha date NOT NULL,
@@ -53,7 +50,7 @@ CREATE TABLE  IF NOT EXISTS Ciudad (
   NombreCiudad text,
   Continente text,
   Pais text,
-  Poblacion bigint DEFAULT NULL,
+  Poblacion bigint ,
   Region text,
   TerritorioVentas text,
   NombreEstadoProvincia  text,
