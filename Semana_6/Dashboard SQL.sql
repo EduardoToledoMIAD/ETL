@@ -169,4 +169,4 @@ Group by PaisEntrega, CiudadEntrega;
 
 
 select * from InventarioDatamart
-WHERE Cliente like '%Win%'
+WHERE Cliente like '%Olya%'
